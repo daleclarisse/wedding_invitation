@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Dale &amp; Clarisse — 19 September 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F7F4EE;
+    --ivory-2:#EFEAE1;
+    --stone:#D8D1C5;
+    --stone-deep:#A79C8B;
+    --gold:#B08D57;
+    --gold-light:#CBAE7B;
+    --ink:#2E2A24;        /* warm near-black outline + text */
+    --ink-soft:rgba(46,42,36,.15);
+    --script:"Pinyon Script",cursive;
+    --serif:"Cormorant Garamond",Georgia,serif;
+    --sans:"Jost",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;color:var(--ink);
+    font-family:var(--serif);font-size:20px;font-weight:400;line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* fixed photographic backdrop — swap PHOTO below for the couple's image */
+  #backdrop{
+    position:fixed;inset:0;z-index:-2;background-color:#8C8271;
+    background-size:cover;background-position:center;
+  }
+  #backdrop.fallback{
+    background-image:
+      radial-gradient(circle at 22% 26%, rgba(203,174,123,.85), transparent 46%),
+      radial-gradient(circle at 74% 18%, rgba(247,244,238,.7), transparent 42%),
+      radial-gradient(circle at 62% 78%, rgba(120,108,92,.9), transparent 55%),
+      radial-gradient(circle at 12% 82%, rgba(176,141,87,.55), transparent 50%),
+      linear-gradient(160deg,#B3A794 0%,#8B806E 52%,#5F5749 100%);
+  }
+  #backdrop::after{
+    content:"";position:absolute;inset:0;
+    background:radial-gradient(ellipse at center, transparent 42%, rgba(46,42,36,.42) 100%);
+  }
+  a{color:inherit}
+  ::selection{background:var(--gold-light)}
+  :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+  .wrap{max-width:900px;margin:0 auto;padding:0 26px}
+  .sheet{background:rgba(247,244,238,.96);padding:84px 0;text-align:center;position:relative}
+  .sheet + .sheet{border-top:1px solid var(--ink-soft)}
+  .caps{font-family:var(--sans);font-weight:300;font-size:12px;letter-spacing:.38em;text-transform:uppercase}
+  .label{color:var(--gold);margin:0 0 14px}
+  h2{font-family:var(--script);font-weight:400;font-size:clamp(40px,6.4vw,62px);line-height:1.12;margin:0 0 10px}
+  h3{font-family:var(--serif);font-weight:600;font-size:23px;margin:0 0 4px}
+  p{margin:0 auto 18px;max-width:56ch}
+  strong{font-weight:600}
+
+  /* gold ornament */
+  .orn{display:block;width:190px;height:auto;margin:16px auto 26px}
+  .goldrule{display:flex;align-items:center;gap:14px;justify-content:center;margin:24px auto;max-width:420px}
+  .goldrule::before,.goldrule::after{content:"";flex:1;height:1px;background:var(--gold);opacity:.7}
+  .goldrule span{color:var(--gold)}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:60;background:rgba(247,244,238,.94);border-bottom:1px solid var(--gold)}
+  .navrow{display:flex;align-items:center;gap:2px;max-width:900px;margin:0 auto;padding:11px 26px;overflow-x:auto;scrollbar-width:none}
+  .navrow::-webkit-scrollbar{display:none}
+  .navrow .mark{font-family:var(--script);font-size:26px;line-height:1;margin-right:auto;padding-right:18px;white-space:nowrap}
+  .navrow a{
+    font-family:var(--sans);font-weight:300;font-size:11px;letter-spacing:.24em;text-transform:uppercase;
+    text-decoration:none;padding:8px 11px;white-space:nowrap;border-bottom:1px solid transparent;
+  }
+  .navrow a:hover{border-bottom-color:var(--gold);color:var(--gold)}
+  .navrow a.cta{border:1px solid var(--gold);color:var(--gold);padding:8px 16px}
+  .navrow a.cta:hover{background:var(--gold);color:var(--ivory)}
+
+  /* ---------- hero over the photo ---------- */
+  header{
+    min-height:88vh;display:flex;align-items:center;justify-content:center;
+    padding:96px 26px;text-align:center;color:var(--ivory);position:relative;
+  }
+  .frame{
+    border:1px solid rgba(247,244,238,.55);padding:64px 44px 54px;max-width:760px;width:100%;
+    background:rgba(46,42,36,.16);backdrop-filter:blur(1.5px);
+  }
+  .names{
+    font-family:var(--script);font-size:clamp(56px,11.5vw,112px);line-height:1;margin:14px 0 0;font-weight:400;
+    text-shadow:0 2px 26px rgba(46,42,36,.4);
+  }
+  .names .amp{display:block;font-size:.42em;color:var(--gold-light);margin:4px 0}
+  header .goldrule::before,header .goldrule::after{background:var(--gold-light);opacity:.85}
+  header .goldrule span{color:var(--gold-light)}
+  .heroMeta{font-size:22px;font-weight:300;margin:0;text-shadow:0 1px 16px rgba(46,42,36,.45)}
+  .heroMeta em{font-style:italic}
+  .count{margin-top:26px;color:var(--gold-light)}
+
+  /* photo reveal bands */
+  .reveal{
+    min-height:46vh;display:flex;align-items:center;justify-content:center;
+    padding:70px 26px;text-align:center;color:var(--ivory);
+  }
+  .reveal p{font-family:var(--script);font-size:clamp(30px,5.2vw,50px);line-height:1.35;max-width:20ch;text-shadow:0 2px 22px rgba(46,42,36,.5);margin:0}
+
+  /* ---------- invitation ---------- */
+  .verse{font-family:var(--script);font-size:clamp(27px,4.2vw,40px);line-height:1.32;max-width:22ch;margin:0 auto 20px}
+  .lede{font-size:22px;font-style:italic;font-weight:300}
+  .deadline{
+    display:inline-block;border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);
+    padding:12px 24px;margin-top:12px;font-size:19px;
+  }
+
+  /* ---------- the day ---------- */
+  .events{max-width:600px;margin:24px auto 0;text-align:left}
+  .ev{display:grid;grid-template-columns:104px 1fr;gap:22px;padding:20px 0;border-bottom:1px solid var(--ink-soft)}
+  .ev:first-child{border-top:1px solid var(--ink-soft)}
+  .ev time{font-family:var(--sans);font-weight:300;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;padding-top:8px;color:var(--gold)}
+  .ev p{margin:2px 0 0;font-size:19px;font-weight:300;max-width:none}
+  .ev.key h3::after{
+    content:"";display:inline-block;width:6px;height:6px;transform:rotate(45deg);
+    background:var(--gold);margin-left:10px;vertical-align:middle;
+  }
+
+  /* ---------- venue ---------- */
+  .venues{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin:26px 0}
+  .venue{border:1px solid var(--gold);background:var(--ivory-2);padding:32px 24px}
+  .venue .when{color:var(--gold);margin:0 0 10px}
+  .venue h3{font-family:var(--script);font-size:33px;font-weight:400;margin:0 0 2px}
+  .venue address{font-style:italic;font-weight:300;margin-bottom:16px}
+  .linkline{
+    font-family:var(--sans);font-weight:300;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+    text-decoration:none;border-bottom:1px solid var(--gold);padding-bottom:3px;
+  }
+  .linkline:hover{color:var(--gold)}
+  .minimap{width:100%;height:auto;display:block;border:1px solid var(--gold);background:var(--ivory-2)}
+  .caption{font-style:italic;font-weight:300;font-size:18px;margin-top:12px}
+
+  /* ---------- rsvp ---------- */
+  #rsvp .panel{border:1px solid var(--gold);background:var(--ivory-2);padding:58px 32px 50px;position:relative}
+  #rsvp .panel::before{content:"";position:absolute;inset:8px;border:1px solid rgba(176,141,87,.4);pointer-events:none}
+  form{margin:24px auto 0;display:grid;gap:20px;max-width:500px;text-align:left}
+  .field{display:grid;gap:7px}
+  label{font-family:var(--sans);font-weight:300;font-size:11px;letter-spacing:.22em;text-transform:uppercase}
+  input,select,textarea{
+    font-family:var(--serif);font-size:19px;font-weight:400;color:var(--ink);
+    background:var(--ivory);border:1px solid var(--ink);border-radius:0;padding:11px 12px;width:100%;
+  }
+  input:focus,select:focus,textarea:focus{outline:0;border-color:var(--gold);box-shadow:0 0 0 3px rgba(176,141,87,.25)}
+  input::placeholder,textarea::placeholder{color:rgba(46,42,36,.4);font-style:italic}
+  select{appearance:none;background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);background-position:calc(100% - 19px) 22px,calc(100% - 13px) 22px;background-size:6px 6px;background-repeat:no-repeat}
+  textarea{resize:vertical;min-height:80px}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .choice{display:flex;gap:12px}
+  .choice input{position:absolute;opacity:0;width:1px;height:1px}
+  .choice label{
+    flex:1;text-align:center;padding:13px;border:1px solid var(--ink);background:var(--ivory);
+    cursor:pointer;font-size:11px;letter-spacing:.2em;transition:.12s
+  }
+  .choice input:checked + label{background:var(--ink);color:var(--ivory);border-color:var(--ink)}
+  .choice input:focus-visible + label{outline:2px solid var(--gold);outline-offset:3px}
+  button{
+    font-family:var(--sans);font-weight:300;font-size:11.5px;letter-spacing:.26em;text-transform:uppercase;
+    background:var(--ink);color:var(--ivory);border:1px solid var(--ink);padding:15px 34px;cursor:pointer;justify-self:center
+  }
+  button:hover{background:var(--gold);border-color:var(--gold)}
+  button[disabled]{opacity:.55;cursor:progress}
+  .note{font-style:italic;font-weight:300;font-size:17px;text-align:center;max-width:46ch;margin:0 auto}
+  .msg{display:none;font-size:18px;padding:11px 14px;border:1px solid var(--gold);color:var(--ink);background:var(--ivory)}
+  .msg.err{display:block}
+  .thanks{display:none;border:1px solid var(--gold);background:var(--ivory);padding:34px;margin:24px auto 0;max-width:500px}
+  .thanks h3{font-family:var(--script);font-size:38px;font-weight:400}
+  .linkbtn{
+    background:none;border:0;color:var(--gold);font-family:var(--sans);font-weight:300;font-size:11px;
+    letter-spacing:.22em;text-transform:uppercase;cursor:pointer;padding:0;border-bottom:1px solid var(--gold);
+  }
+  .linkbtn:hover{color:var(--ink);border-color:var(--ink)}
+
+  /* ---------- rsvp: invitation code gate ---------- */
+  .step{display:none}
+  .step.on{display:block}
+  .gateTitle{font-family:var(--script);font-size:clamp(30px,5vw,40px);font-weight:400;margin:6px 0 12px}
+  .gateNote{font-weight:300;font-size:18px;max-width:52ch}
+  #codeForm{max-width:360px}
+  #code{
+    font-family:var(--sans);font-weight:300;font-size:19px;letter-spacing:.3em;
+    text-align:center;text-transform:uppercase;
+  }
+  .welcome{
+    border-top:1px solid var(--gold);border-bottom:1px solid var(--gold);
+    padding:24px 16px;margin:26px auto 0;max-width:500px;
+  }
+  .welcome .guest{font-family:var(--script);font-size:clamp(34px,6vw,44px);font-weight:400;line-height:1.1;margin:2px 0 18px}
+  .seatCount{font-family:var(--script);font-size:54px;line-height:1;color:var(--gold);margin:2px 0 0}
+  .seatWord{font-style:italic;font-weight:300;font-size:17px;margin:4px 0 0}
+  .changeCode{margin-top:16px}
+
+  /* ---------- gifts ---------- */
+  .gifts{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+  .gift{border:1px solid var(--ink-soft);padding:28px 22px;background:var(--ivory)}
+  .gift h3{font-family:var(--script);font-size:31px;font-weight:400;margin-bottom:6px}
+  .gift p{font-size:18px;font-weight:300;margin-bottom:16px}
+  .gift .stem{display:block;width:38px;height:auto;margin:0 auto 12px}
+
+  /* ---------- questions ---------- */
+  .faq{max-width:640px;margin:24px auto 0;text-align:left}
+  details{border-bottom:1px solid var(--ink-soft);padding:16px 4px}
+  details:first-of-type{border-top:1px solid var(--ink-soft)}
+  summary{cursor:pointer;list-style:none;font-weight:600;font-size:21px;display:flex;gap:16px}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";margin-left:auto;color:var(--gold);font-weight:400}
+  details[open] summary::after{content:"–"}
+  details p{margin:8px 0 0;font-weight:300;font-size:19px;max-width:none}
+
+  /* ---------- kindly reminders ---------- */
+  .reminders{display:grid;grid-template-columns:1fr 1fr;gap:0 40px;text-align:left;margin:26px auto 0;max-width:760px}
+  .rem{padding:22px 0;border-top:1px solid var(--ink-soft)}
+  .rem .icon{font-size:19px;line-height:1;margin-right:9px}
+  .rem h3{display:flex;align-items:baseline;font-size:20px;margin:0 0 4px}
+  .rem p{font-size:18px;font-weight:300;margin:0;max-width:none}
+
+  /* ---------- guest list ---------- */
+  #list{display:none;margin:30px auto 0;border:1px solid var(--gold);padding:24px;background:var(--ivory-2);max-width:640px;text-align:left}
+  .tally{display:flex;gap:34px;justify-content:center;margin-bottom:16px}
+  .tallyItem{text-align:center}
+  .tally b{font-family:var(--script);font-weight:400;font-size:44px;display:block;line-height:1;color:var(--gold)}
+  .tally span{font-family:var(--sans);font-weight:300;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase}
+  .row{display:flex;justify-content:space-between;gap:14px;padding:9px 0;border-top:1px solid var(--ink-soft);font-size:18px}
+  .row .st{font-style:italic;font-weight:300;color:var(--stone-deep)}
+
+  footer{text-align:center;padding:64px 26px 76px;color:var(--ivory)}
+  footer .hash{font-family:var(--script);font-size:clamp(36px,7vw,60px);margin:0;text-shadow:0 2px 20px rgba(46,42,36,.5)}
+  footer .fine{margin-top:14px;color:var(--gold-light)}
+
+  @media (max-width:780px){
+    .sheet{padding:62px 0}
+    .frame{padding:48px 22px 42px}
+    .venues,.gifts,.two-col,.reminders{grid-template-columns:1fr}
+    .ev{grid-template-columns:1fr;gap:2px}
+    .ev time{padding-top:0}
+    #rsvp .panel{padding:44px 18px 40px}
+  }
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<div id="backdrop" class="fallback" aria-hidden="true"></div>
+
+<!-- gold line-art library -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="bloom" viewBox="0 0 120 120">
+      <g fill="none" stroke="#B08D57" stroke-width="1.6" stroke-linejoin="round">
+        <ellipse cx="60" cy="26" rx="12" ry="22"/>
+        <ellipse cx="60" cy="26" rx="12" ry="22" transform="rotate(60 60 60)"/>
+        <ellipse cx="60" cy="26" rx="12" ry="22" transform="rotate(120 60 60)"/>
+        <ellipse cx="60" cy="26" rx="12" ry="22" transform="rotate(180 60 60)"/>
+        <ellipse cx="60" cy="26" rx="12" ry="22" transform="rotate(240 60 60)"/>
+        <ellipse cx="60" cy="26" rx="12" ry="22" transform="rotate(300 60 60)"/>
+        <ellipse cx="60" cy="42" rx="8" ry="14" transform="rotate(30 60 60)"/>
+        <ellipse cx="60" cy="42" rx="8" ry="14" transform="rotate(150 60 60)"/>
+        <ellipse cx="60" cy="42" rx="8" ry="14" transform="rotate(270 60 60)"/>
+        <circle cx="60" cy="60" r="7"/>
+      </g>
+    </symbol>
+
+    <symbol id="bud" viewBox="0 0 70 110">
+      <g fill="none" stroke="#B08D57" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M35 104 L35 54"/>
+        <path d="M35 10 C52 29 52 48 35 56 C18 48 18 29 35 10 Z"/>
+        <path d="M35 16 C43 31 43 45 35 54"/>
+        <path d="M35 68 C24 68 17 75 16 84 C27 84 34 78 35 68 Z"/>
+        <path d="M35 76 C46 76 53 83 54 92 C43 92 36 86 35 76 Z"/>
+      </g>
+    </symbol>
+
+    <symbol id="sprig" viewBox="0 0 150 80">
+      <g fill="none" stroke="#B08D57" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round">
+        <path d="M6 74 C50 68 100 48 146 8"/>
+        <path d="M0 0 C9 -11 24 -11 32 0 C24 11 9 11 0 0 Z" transform="translate(28 68) rotate(-38)"/>
+        <path d="M0 0 C9 -11 24 -11 32 0 C24 11 9 11 0 0 Z" transform="translate(40 62) rotate(28)"/>
+        <path d="M0 0 C8 -10 21 -10 28 0 C21 10 8 10 0 0 Z" transform="translate(68 53) rotate(-42)"/>
+        <path d="M0 0 C8 -10 21 -10 28 0 C21 10 8 10 0 0 Z" transform="translate(80 45) rotate(24)"/>
+        <path d="M0 0 C7 -9 18 -9 24 0 C18 9 7 9 0 0 Z" transform="translate(106 31) rotate(-46)"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<nav>
+  <div class="navrow">
+    <span class="mark">D &amp; C</span>
+    <a href="#invitation">Invitation</a>
+    <a href="#day">The day</a>
+    <a href="#venue">Venue</a>
+    <a href="#gifts">Gifts</a>
+    <a href="#faq">Questions</a>
+    <a href="#reminders">Reminders</a>
+    <a href="#rsvp" class="cta">RSVP</a>
+  </div>
+</nav>
+
+<header>
+  <div class="frame">
+    <p class="caps">Together with our families</p>
+    <h1 class="names">Dale<span class="amp">&amp;</span>Clarisse</h1>
+    <div class="goldrule"><span class="caps">September 19, 2026</span></div>
+    <p class="heroMeta">Half past three in the afternoon<br><em>Tagaytay, Philippines</em></p>
+    <p class="caps count" id="countdown">&nbsp;</p>
+  </div>
+</header>
+
+<section id="invitation" class="sheet">
+  <div class="wrap">
+    <p class="caps label">The invitation</p>
+    <p class="verse">Ten years after a wrong turn on the road to Taal, we are making it official.</p>
+    <svg class="orn" viewBox="0 0 400 70" aria-hidden="true">
+      <use href="#sprig" x="10" y="8" width="140" height="74" transform="scale(-1,1) translate(-300,0)"/>
+      <use href="#bloom" x="170" y="8" width="60" height="60"/>
+      <use href="#sprig" x="250" y="8" width="140" height="74"/>
+    </svg>
+    <p class="lede">We are keeping it small: one afternoon, ninety people, and a long table under the mango trees.</p>
+    <p>The ceremony begins at half past three exactly. The light through the chapel at that hour is the whole reason we chose it, so please come early enough to see it.</p>
+    <p class="deadline">Kindly reply before <strong>the thirtieth of August, 2026</strong></p>
+  </div>
+</section>
+
+<section id="day" class="sheet">
+  <div class="wrap">
+    <p class="caps label">Hour by hour</p>
+    <h2>The Day</h2>
+    <div class="events" id="events"></div>
+  </div>
+</section>
+
+<div class="reveal">
+  <p>Come for the vows, stay for the lechon.</p>
+</div>
+
+<section id="venue" class="sheet">
+  <div class="wrap">
+    <p class="caps label">Getting there</p>
+    <h2>Two Stops</h2>
+    <p>Four minutes apart along the ridge.</p>
+    <div class="venues">
+      <div class="venue">
+        <p class="caps when">Ceremony · 3:30 PM</p>
+        <h3>Chapel on the Ridge</h3>
+        <address>Ridge Road, Tagaytay City, Cavite</address><br>
+        <a class="linkline" href="https://www.google.com/maps/search/?api=1&query=Tagaytay+Ridge+Chapel" target="_blank" rel="noopener">Open in Maps</a>
+      </div>
+      <div class="venue">
+        <p class="caps when">Reception · 5:00 PM</p>
+        <h3>Casa Verde Gardens</h3>
+        <address>Aguinaldo Highway, Tagaytay City, Cavite</address><br>
+        <a class="linkline" href="https://www.google.com/maps/search/?api=1&query=Casa+Verde+Gardens+Tagaytay" target="_blank" rel="noopener">Open in Maps</a>
+      </div>
+    </div>
+
+    <svg class="minimap" viewBox="0 0 800 300" role="img" aria-label="Simplified map. The chapel and the reception garden sit 1.8 kilometres apart along Ridge Road, above Taal Lake.">
+      <rect width="800" height="300" fill="#EFEAE1"/>
+      <path d="M0 240 C 150 208, 310 254, 470 228 C 610 206, 706 236, 800 216 L800 300 L0 300Z" fill="#D8D1C5" stroke="#B08D57" stroke-width="1"/>
+      <text x="590" y="278" font-family="Jost, sans-serif" font-size="12" letter-spacing="5" fill="#2E2A24" opacity=".55">TAAL LAKE</text>
+      <path d="M28 152 C 200 110, 380 178, 560 130 C 662 102, 732 122, 782 108" stroke="#2E2A24" stroke-width="1.5" fill="none" opacity=".45"/>
+      <path d="M256 132 C 300 152, 342 180, 374 158" stroke="#B08D57" stroke-width="1.5" fill="none" stroke-dasharray="6 7"/>
+      <text x="28" y="180" font-family="Jost, sans-serif" font-size="11" letter-spacing="4" fill="#2E2A24" opacity=".45">RIDGE ROAD</text>
+      <use href="#bloom" x="236" y="112" width="40" height="40"/>
+      <text x="256" y="100" text-anchor="middle" font-family="Cormorant Garamond, serif" font-weight="600" font-size="19" fill="#2E2A24">Chapel on the Ridge</text>
+      <text x="256" y="80" text-anchor="middle" font-family="Jost, sans-serif" font-size="11" letter-spacing="4" fill="#B08D57">3:30 PM</text>
+      <use href="#bloom" x="354" y="138" width="40" height="40"/>
+      <text x="404" y="188" font-family="Cormorant Garamond, serif" font-weight="600" font-size="19" fill="#2E2A24">Casa Verde Gardens</text>
+      <text x="404" y="208" font-family="Jost, sans-serif" font-size="11" letter-spacing="4" fill="#B08D57">5:00 PM · 1.8 KM ON</text>
+    </svg>
+    <p class="caption">Free parking at both stops. Shuttles leave the chapel gate at 4:30 and 4:50.</p>
+  </div>
+</section>
+
+<section id="rsvp" class="sheet">
+  <div class="wrap">
+    <div class="panel">
+      <p class="caps label">Répondez s'il vous plaît</p>
+      <h2>Will you be there?</h2>
+
+      <!-- ===== STEP 1 · invitation code ===== -->
+      <div class="step on" id="stepCode">
+        <h3 class="gateTitle">Before You RSVP</h3>
+        <p class="gateNote">We are so grateful to celebrate this special day with you. To ensure a comfortable and intimate celebration, each invitation is reserved for the guest(s) intended by the couple. If you have any questions regarding your invitation, please don't hesitate to contact us before submitting your RSVP. Thank you for your understanding and support.</p>
+        <p class="gateNote">Please enter the invitation code found on your invitation. This lets us show the number of seats reserved for you.</p>
+
+        <form id="codeForm" novalidate>
+          <div class="field">
+            <label for="code">Invitation code</label>
+            <input id="code" name="code" type="text" placeholder=" " autocomplete="off" spellcheck="false" required />
+          </div>
+          <p class="msg" id="codeMsg"></p>
+          <button type="submit" id="verifyBtn">Verify</button>
+        </form>
+      </div>
+
+      <!-- ===== code not found ===== -->
+      <div class="step" id="stepNotFound">
+        <div class="thanks" style="display:block">
+          <h3>Sorry</h3>
+          <p>We couldn't find that invitation code. Please check your invitation, or message us and we will sort it out.</p>
+          <button class="linkbtn" id="retryBtn">Try another code</button>
+        </div>
+      </div>
+
+      <!-- ===== already replied ===== -->
+      <div class="step" id="stepAlready">
+        <div class="thanks" style="display:block">
+          <h3>You've already replied</h3>
+          <p id="alreadyBody"></p>
+          <button type="button" id="updateBtn">Update RSVP</button>
+        </div>
+      </div>
+
+      <!-- ===== STEP 3 · the form ===== -->
+      <div class="step" id="stepForm">
+        <div class="welcome">
+          <p class="caps label" style="margin-bottom:0">Welcome</p>
+          <p class="guest" id="guestName"></p>
+          <p class="caps label" style="margin-bottom:0">Reserved seats</p>
+          <p class="seatCount" id="seatCount">1</p>
+          <p class="seatWord" id="seatWord"></p>
+        </div>
+
+        <form id="rsvpForm" novalidate>
+          <div class="field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" placeholder="you@email.com" required />
+          </div>
+
+          <div class="field">
+            <label>Will you attend?</label>
+            <div class="choice">
+              <input type="radio" id="yes" name="attending" value="yes" checked />
+              <label for="yes">Joyfully accepts</label>
+              <input type="radio" id="no" name="attending" value="no" />
+              <label for="no">Regretfully declines</label>
+            </div>
+          </div>
+
+          <div class="field" id="seatsField">
+            <label for="seats">How many of your reserved seats will attend?</label>
+            <select id="seats" name="seats"></select>
+          </div>
+
+          <div class="field">
+            <label for="notes">Message</label>
+            <textarea id="notes" name="notes" placeholder="Allergies, accessibility needs, arrival time, or the song that gets you dancing"></textarea>
+          </div>
+
+          <p class="msg" id="formMsg"></p>
+          <button type="submit" id="submitBtn">Submit RSVP</button>
+          <p class="note">Only the couple sees your reply. You may change your answer any time before the thirtieth of August, 2026.</p>
+        </form>
+      </div>
+
+      <!-- ===== confirmation ===== -->
+      <div class="step" id="stepThanks">
+        <div class="thanks" style="display:block">
+          <h3 id="thanksTitle">You're on the list</h3>
+          <p id="thanksBody"></p>
+          <button class="linkbtn" id="editBtn">Change my answer</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="gifts" class="sheet">
+  <div class="wrap">
+    <p class="caps label">Gifts</p>
+    <h2>Your Presence Is the Gift</h2>
+    <p>We have lived together for six years, so we are short on toasters and long on plans. Any of these is more than enough.</p>
+    <div class="gifts">
+      <div class="gift">
+        <svg class="stem" viewBox="0 0 70 110" aria-hidden="true"><use href="#bud" width="70" height="110"/></svg>
+        <h3>Honeymoon fund</h3>
+        <p>Two weeks in Palawan, a dive licence each, and far too much grilled fish.</p>
+        <a class="linkline" href="#rsvp">Contribute</a>
+      </div>
+      <div class="gift">
+        <svg class="stem" viewBox="0 0 70 110" aria-hidden="true"><use href="#bud" width="70" height="110"/></svg>
+        <h3>The house list</h3>
+        <p>A short registry of things we actually need for the flat in Makati.</p>
+        <a class="linkline" href="#rsvp">View the list</a>
+      </div>
+      <div class="gift">
+        <svg class="stem" viewBox="0 0 70 110" aria-hidden="true"><use href="#bud" width="70" height="110"/></svg>
+        <h3>Give it forward</h3>
+        <p>Send it to the Tagaytay school feeding programme instead. We would love that.</p>
+        <a class="linkline" href="#rsvp">Donate</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="sheet">
+  <div class="wrap">
+    <p class="caps label">Questions</p>
+    <h2>Everything Else</h2>
+    <div class="faq">
+      <details><summary>What should I wear?</summary><p>Garden formal. Long dresses, barong, or a light suit. It is a lawn at dusk, so the grass beats stilettos every time.</p></details>
+      <details><summary>Can I bring a plus-one?</summary><p>Your invitation code holds a fixed number of seats, and the RSVP form will only let you choose up to that number. If you think we have made a mistake, message us before you reply.</p></details>
+      <details><summary>Are children welcome?</summary><p>Only the children named on your invitation, and they are counted in your reserved seats. There is a children's table with its own dessert menu — tell us their ages in the message field.</p></details>
+      <details><summary>Where can we stay?</summary><p>We are holding rooms at two hotels within ten minutes of the venue. Reply "hotels" to your confirmation email and we will send the booking codes.</p></details>
+      <details><summary>What is the weather like in September?</summary><p>Cool for the Philippines, around 20°C after sunset and breezy on the ridge. Bring a light layer.</p></details>
+      <details><summary>Can I post photos?</summary><p>Please do, after the ceremony. During the vows we would rather see faces than phones.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="reminders" class="sheet">
+  <div class="wrap">
+    <p class="caps label">Before the day</p>
+    <h2>A Few Kindly Reminders</h2>
+    <div class="reminders">
+      <div class="rem">
+        <h3><span class="icon">🤍</span>RSVP deadline</h3>
+        <p>Kindly submit your RSVP on or before August 30, 2026. Responses received after this date may not be accommodated.</p>
+      </div>
+      <div class="rem">
+        <h3><span class="icon">👥</span>By invitation only</h3>
+        <p>Each invitation is reserved exclusively for the guest(s) named on it. We respectfully ask that no additional guests be brought unless previously approved by the couple.</p>
+      </div>
+      <!-- Adults-only alternative: "We kindly request an adults-only celebration.
+           We hope this advance notice allows you to make the necessary arrangements." -->
+      <div class="rem">
+        <h3><span class="icon">👶</span>Children</h3>
+        <p>To help us manage our seating arrangements, only children specifically included in the invitation are invited to attend.</p>
+      </div>
+      <div class="rem">
+        <h3><span class="icon">👗</span>Dress code</h3>
+        <p>Please join us in semi-formal to formal attire. We kindly ask guests to avoid wearing white, ivory, or cream out of respect for the bride.</p>
+      </div>
+      <div class="rem">
+        <h3><span class="icon">⏰</span>Arrival time</h3>
+        <p>Please arrive at least 30 minutes before the ceremony so everyone is comfortably seated before the processional begins.</p>
+      </div>
+      <div class="rem">
+        <h3><span class="icon">📸</span>Ceremony etiquette</h3>
+        <p>We warmly invite you to be fully present during our ceremony. Kindly silence your phones and allow our photographers to capture the moment.</p>
+      </div>
+      <div class="rem">
+        <h3><span class="icon">🚗</span>Parking</h3>
+        <p>Complimentary parking will be available at the venue. Additional details can be found in the Venue section.</p>
+      </div>
+      <div class="rem">
+        <h3><span class="icon">💌</span>Special requests</h3>
+        <p>If you have dietary restrictions, accessibility needs, or other important concerns, please let us know in the message section of the RSVP form.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p class="hash">#DaleAndClarisse</p>
+  <p class="caps fine">19 September 2026 · Tagaytay</p>
+</footer>
+
+<script>
+/* ---------- config ---------- */
+/* Paste the couple's photo URL here for the fixed background. Empty = stone fallback. */
+const PHOTO = "";
+
+/* Google Apps Script web app URL (see Code.gs — redeploy after pasting the new script) */
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbxWqRdTObPpF5NFFNp-XK5_X682UUOMK6lWkcI7RO2BmmJ4hhUXHKQqns_iMz6ic1_m3w/exec";
+
+const WEDDING = new Date("2026-09-19T15:30:00+08:00");
+
+const EVENTS = [
+  { time:"2:45 PM", title:"Doors open",              desc:"Find a seat, sign the book, say hello to the titas.", key:false },
+  { time:"3:30 PM", title:"Ceremony",                desc:"Thirty minutes, one reading, two sets of vows.", key:true },
+  { time:"4:15 PM", title:"Photographs on the ridge",desc:"Family groups first, then everyone. Drinks are already pouring.", key:false },
+  { time:"5:00 PM", title:"Cocktails in the garden", desc:"Calamansi spritz, lumpia, and the good cheese.", key:false },
+  { time:"6:30 PM", title:"Dinner under the trees",  desc:"One long table. The seating chart is at the entrance.", key:true },
+  { time:"8:00 PM", title:"Toasts and first dance",  desc:"Three speeches, each of them timed.", key:false },
+  { time:"9:00 PM", title:"Dancing",                 desc:"Band until eleven, then the playlist you helped build.", key:false },
+  { time:"11:30 PM",title:"Last call",               desc:"Shuttles back to the hotels leave at midnight.", key:false }
+];
+
+/* ---------- backdrop ---------- */
+if (PHOTO) {
+  const bd = document.getElementById("backdrop");
+  bd.classList.remove("fallback");
+  bd.style.backgroundImage = `url("${PHOTO}")`;
+}
+
+/* ---------- countdown ---------- */
+function tick(){
+  const days = Math.ceil((WEDDING - Date.now()) / 86400000);
+  document.getElementById("countdown").textContent =
+    days > 1 ? days + " days to go" : days === 1 ? "Tomorrow" : days === 0 ? "Today" : "Married";
+}
+tick(); setInterval(tick, 60000);
+
+/* ---------- the day ---------- */
+document.getElementById("events").innerHTML = EVENTS.map(e => `
+  <div class="ev${e.key ? " key" : ""}">
+    <time>${e.time}</time>
+    <div><h3>${e.title}</h3><p>${e.desc}</p></div>
+  </div>`).join("");
+
+/* ---------- rsvp ---------- */
+const steps = {
+  code:     document.getElementById("stepCode"),
+  notFound: document.getElementById("stepNotFound"),
+  already:  document.getElementById("stepAlready"),
+  form:     document.getElementById("stepForm"),
+  thanks:   document.getElementById("stepThanks")
+};
+const codeForm  = document.getElementById("codeForm");
+const codeInput = document.getElementById("code");
+const codeMsg   = document.getElementById("codeMsg");
+const verifyBtn = document.getElementById("verifyBtn");
+
+const rsvpForm   = document.getElementById("rsvpForm");
+const formMsg    = document.getElementById("formMsg");
+const submitBtn  = document.getElementById("submitBtn");
+const seatsField = document.getElementById("seatsField");
+const seatsSel   = document.getElementById("seats");
+
+let invite = null;   /* { code, name, seats, status, email, attendingSeats, message } */
+
+function show(name){
+  Object.values(steps).forEach(s => s.classList.remove("on"));
+  steps[name].classList.add("on");
+}
+function error(el, text){ el.textContent = text; el.className = "msg err"; }
+function clearMsg(el){ el.textContent = ""; el.className = "msg"; }
+function busy(btn, text){ btn.dataset.idle = btn.textContent; btn.disabled = true; btn.textContent = text; }
+function idle(btn){ btn.disabled = false; btn.textContent = btn.dataset.idle || btn.textContent; }
+
+function remember(code){ try { localStorage.setItem("dc-code", code); } catch(e){} }
+function recall(){ try { return localStorage.getItem("dc-code") || ""; } catch(e){ return ""; } }
+
+async function api(payload){
+  const res  = await fetch(ENDPOINT, { method:"POST", body: JSON.stringify(payload) });
+  const text = await res.text();
+  try { return JSON.parse(text); } catch(e){ return { ok:false, error:"BAD_RESPONSE" }; }
+}
+
+/* --- step 1: verify the invitation code --- */
+codeForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  clearMsg(codeMsg);
+  const code = codeInput.value.trim().toUpperCase();
+  if (!code) return error(codeMsg, "Enter the code printed on your invitation.");
+
+  busy(verifyBtn, "Checking…");
+  const r = await api({ action:"verify", code });
+  idle(verifyBtn);
+
+  if (!r.ok) {
+    if (r.error === "NOT_FOUND") return show("notFound");
+    return error(codeMsg, "We couldn't check that just now. Please try again in a moment.");
+  }
+
+  invite = r;
+  remember(r.code);
+
+  const replied = String(r.status || "").toLowerCase();
+  if (replied === "accepted" || replied === "declined") {
+    document.getElementById("alreadyBody").textContent =
+      `This invitation has already submitted an RSVP under ${r.name} (${r.status.toLowerCase()}). Would you like to update your response?`;
+    show("already");
+  } else {
+    openForm();
+  }
+});
+
+document.getElementById("retryBtn").addEventListener("click", () => {
+  codeInput.value = ""; clearMsg(codeMsg); show("code"); codeInput.focus();
+});
+document.getElementById("updateBtn").addEventListener("click", openForm);
+document.getElementById("editBtn").addEventListener("click", openForm);
+
+/* --- step 3: build the form for this invitation --- */
+function openForm(){
+  clearMsg(formMsg);
+  const seats = Math.max(1, Number(invite.seats) || 1);
+
+  document.getElementById("guestName").textContent = invite.name;
+  document.getElementById("seatCount").textContent = seats;
+  document.getElementById("seatWord").textContent  =
+    seats === 1 ? "This invitation is for one guest." : `This invitation is for ${seats} guests.`;
+
+  /* dropdown only ever offers 1…reserved seats — and disappears entirely for a single seat */
+  seatsSel.innerHTML = "";
+  for (let i = 1; i <= seats; i++){
+    const o = document.createElement("option");
+    o.value = i; o.textContent = i;
+    seatsSel.appendChild(o);
+  }
+  const prev = Number(invite.attendingSeats);
+  seatsSel.value = prev >= 1 && prev <= seats ? prev : seats;
+
+  rsvpForm.email.value = invite.email || "";
+  rsvpForm.notes.value = invite.message || "";
+  const declined = String(invite.status || "").toLowerCase() === "declined";
+  rsvpForm.querySelector(`input[name="attending"][value="${declined ? "no" : "yes"}"]`).checked = true;
+
+  syncSeats(seats);
+  show("form");
+}
+
+function syncSeats(seats){
+  const reserved = seats || Math.max(1, Number(invite && invite.seats) || 1);
+  const coming = rsvpForm.attending.value === "yes";
+  seatsField.style.display = (coming && reserved > 1) ? "" : "none";
+}
+rsvpForm.querySelectorAll('input[name="attending"]').forEach(r =>
+  r.addEventListener("change", () => syncSeats())
+);
+
+/* --- submit: updates the existing row, never adds a new one --- */
+rsvpForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  clearMsg(formMsg);
+
+  const email = rsvpForm.email.value.trim();
+  if (!/^\S+@\S+\.\S+$/.test(email)) return error(formMsg, "That email doesn't look right.");
+
+  const attending = rsvpForm.attending.value;
+  const reserved  = Math.max(1, Number(invite.seats) || 1);
+  const seats     = attending === "yes" ? (reserved > 1 ? Number(seatsSel.value) : 1) : 0;
+
+  busy(submitBtn, "Sending…");
+  const r = await api({
+    action:    "submit",
+    code:      invite.code,
+    email:     email,
+    attending: attending,
+    seats:     seats,
+    message:   rsvpForm.notes.value.trim()
+  });
+  idle(submitBtn);
+
+  if (!r.ok) return error(formMsg, "We couldn't save that. Please try again in a moment.");
+
+  invite.status         = attending === "yes" ? "Accepted" : "Declined";
+  invite.email          = email;
+  invite.attendingSeats = seats;
+  invite.message        = rsvpForm.notes.value.trim();
+
+  document.getElementById("thanksTitle").textContent =
+    attending === "yes" ? "You're on the list" : "We'll miss you";
+  document.getElementById("thanksBody").textContent =
+    attending === "yes"
+      ? `${seats} seat${seats > 1 ? "s" : ""} held under ${invite.name}. We look forward to celebrating with you.`
+      : `Thank you for telling us, ${invite.name}. We'll raise a glass to you.`;
+  show("thanks");
+});
+
+/* --- returning guest: prefill the code they used before --- */
+codeInput.value = recall();
+</script>
+</body>
+</html>
